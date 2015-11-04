@@ -32,11 +32,12 @@ module.exports = function(grunt) {
 			},
 			all: [
 				'Gruntfile.js',
-				'src/js/*.js'
+				'src/js/*.js' /*,
+				'src/js/vendor/*.js'*/
 			]
 		},
 
-		// concatenation and minification (no concat in below config as handled by W3TC).
+		// concat and minify (no concat in below config as will be handled by W3TC).
 		uglify: {
 			dist: {
 				files: {
@@ -107,9 +108,6 @@ module.exports = function(grunt) {
 				files: [
 					'<%= jshint.all %>'
 				],
-				options: {
-					nospawn: true,
-				},
 				tasks: ['jshint', 'uglify']
 			},
 			ftpjs: {
@@ -140,7 +138,8 @@ module.exports = function(grunt) {
 		'jshint',
 		'sass',
 		'uglify',
-		'ftpush'
+		'ftpush',
+		'watch'
 	]);
 
 };

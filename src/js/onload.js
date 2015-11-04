@@ -236,7 +236,6 @@ function ScwdMobileMenu(args)
 	},40,false));
 
 	self.init();
-	return self;
 }
 
 function standardiseHeights()
