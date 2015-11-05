@@ -126,6 +126,12 @@ module.exports = function(grunt) {
 				],
 				tasks: ['ftpush:js']
 			},
+			ftpcss: {
+				files: [
+					'build/css/style.css'
+				],
+				tasks: ['ftpush:css']
+			},
 			ftpphp: {
 				files: [
 					'src/templates/*.php'
