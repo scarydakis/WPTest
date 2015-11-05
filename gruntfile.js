@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'build/css/main.css': 'src/css/main.scss'
+					'build/css/style.css': 'src/css/main.scss'
 				}
 			}
 		},
@@ -89,7 +89,17 @@ module.exports = function(grunt) {
 					authKey: 'mcc'
 				},
 				src: 'build/css',
-				dest: '/public_html/dev/wp-content/themes/scwd-custom/css'
+				dest: '/public_html/dev/wp-content/themes/scwd-custom/'
+			},
+			php: {
+				simple: true,
+				auth: {
+					host: 'melbournecitycaravans.com.au',
+					port: 21,
+					authKey: 'mcc'
+				},
+				src: 'src/templates/',
+				dest: '/public_html/dev/wp-content/themes/scwd-custom/'
 			}
 		},
 
@@ -116,11 +126,11 @@ module.exports = function(grunt) {
 				],
 				tasks: ['ftpush:js']
 			},
-			ftpcss: {
+			ftpphp: {
 				files: [
-					'build/css/*'
+					'src/templates/*.php'
 				],
-				tasks: ['ftpush:css']
+				tasks: ['ftpush:php']
 			}
 		}
 

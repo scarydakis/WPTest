@@ -112,6 +112,13 @@ function ScwdMenuFloat(objArgs)
 				fm.removeClass('docked').addClass('undocked');
 			}
 		};
+
+		var reset=function()
+		{
+			fm.removeClass('docked').addClass('undocked');
+			te.css({height:''});
+			te.removeClass('min');
+		};
 		$(window).on('resize scroll', function(e){
 			if (!doMobileMenu())
 			{
@@ -119,8 +126,7 @@ function ScwdMenuFloat(objArgs)
 			}
 			else
 			{
-				fm.removeClass('docked').addClass('undocked');
-				te.css({height:''});
+				reset();
 			}
 		});
 		if (!doMobileMenu())
