@@ -1,21 +1,21 @@
 /*
-	Theme Name: Stephan Carydakis, Web Developer Custom Theme
-	Description: This is a custom template theme.
-	Author: Stephan Carydakis
-	Author URI:
-	Version: 0.1
+Theme Name: Stephan Carydakis, Web Developer Custom Theme
+Description: This is a custom template theme.
+Author: Stephan Carydakis
+Author URI:
+Version: 0.1
 
-	Template: genesis
-	Template Version: 1.0.0
+Template: genesis
+Template Version: 1.0.0
 
-	License: GPL-2.0+
-	License URI: http://www.opensource.org/licenses/gpl-license.php
+License: GPL-2.0+
+License URI: http://www.opensource.org/licenses/gpl-license.php
 */
 /*
 HTML5 Reset
 ---------------------------------------------------------------------------------------------------- */
 /* Baseline Normalize
-	normalize.css v2.1.2 | MIT License | git.io/normalize
+normalize.css v2.1.2 | MIT License | git.io/normalize
 --------------------------------------------- */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
   display: block; }
@@ -360,7 +360,7 @@ img {
   /* IE8 */ }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------
-	BEGIN: videos
+BEGIN: videos
 ------------------------------------------------------------------------------------------------------------------------------------------------*/
 .video-wrap {
   display: block;
@@ -387,7 +387,7 @@ div[id^="leadplayer_video_element"] {
   margin: 0 auto; }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------
-	END: videos
+END: videos
 ------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Forms
 --------------------------------------------- */
@@ -603,8 +603,8 @@ Structure and Layout
   float: right; }
 
 /* Column Classes
-	Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
-	SC: added 'fifths'
+Link: http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css
+SC: added 'fifths'
 --------------------------------------------- */
 .five-sixths, .four-sixths, .one-fourth, .one-half, .one-sixth, .one-third, .three-fourths, .three-sixths, .two-fourths, .two-sixths, .two-thirds, .one-fifth, .two-fifths, .three-fifths, .four-fifths, .ginput_left, .ginput_right, .ginput_full {
   display: inline-block;
@@ -927,7 +927,7 @@ h2.entry-title {
       transform: rotateY(360deg); }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------
-	BEGIN: Social Icons
+BEGIN: Social Icons
 -----------------------------------------------------------------------------------------------------------------------------------*/
 /* normal icons */
 /* hover icons */
@@ -938,7 +938,7 @@ h2.entry-title {
     width: 100% !important; }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------
-	END: Social Icons
+END: Social Icons
 -----------------------------------------------------------------------------------------------------------------------------------*/
 /*
 Widgets
@@ -1053,15 +1053,11 @@ Plugins
   margin: 0; }
 
 .scwd .gform_wrapper input[type="email"], .scwd .gform_wrapper input[type="text"], .scwd .gform_wrapper input[type="tel"] {
-  font-size: 16px;
   font-size: 1.6rem;
-  padding: 10px 16px;
   padding: 1rem 1.6rem; }
 
 .scwd .gform_wrapper select, .scwd .gform_wrapper textarea, .scwd .gform_wrapper .ginput_complex label {
-  font-size: 16px;
   font-size: 1.6rem;
-  padding: 10px 16px;
   padding: 1rem 1.6rem; }
 
 .scwd .gform_wrapper .ginput_container .small {
@@ -1176,12 +1172,12 @@ Site Header
     z-index: 1500; }
     .site-header .float-me.undocked {
       position: static; }
-  .site-header.min {
-    background: rgba(51, 51, 51, 0.92); }
-    .site-header.min .site-title {
-      line-height: .5; }
-      .site-header.min .site-title a {
-        top: -200px; }
+  .site-header.min > .float-me {
+    background: rgba(51, 51, 51, 0.9); }
+  .site-header.min .site-title {
+    line-height: .5; }
+    .site-header.min .site-title a {
+      top: -200px; }
 
 .hdr-float-clone {
   background-color: #333; }
@@ -1312,6 +1308,8 @@ Site Navigation
   width: 100%;
   padding: 0;
   margin: 0; }
+  .genesis-nav-menu > .menu-item {
+    font-size: 1.6rem; }
   .genesis-nav-menu .menu-item {
     position: relative;
     display: inline-block;
@@ -1319,13 +1317,10 @@ Site Navigation
   .genesis-nav-menu .sub-menu .menu-item {
     display: block; }
   .genesis-nav-menu a {
-    border: none;
-    color: #fff;
-    /*#22a6ff;*/
     display: block;
-    font-size: 18px;
-    font-size: 1.8rem;
     position: relative;
+    font-size: inherit;
+    color: #fff;
     z-index: 500; }
     .genesis-nav-menu a:hover {
       color: #333; }
@@ -1337,14 +1332,15 @@ Site Navigation
     padding: .9rem 2rem;
     text-transform: uppercase;
     font-weight: 400;
-    letter-spacing: 1px;
     letter-spacing: .1rem;
     border-radius: 4px;
     margin: 0 .2rem; }
 
-.site-header.min .genesis-nav-menu > .menu-item > a {
-  padding: .75rem 1.5rem;
-  font-size: 1.5rem; }
+.site-header.min .genesis-nav-menu > .menu-item {
+  font-size: 1.4rem; }
+
+.site-header.min .genesis-nav-menu > a {
+  padding: .75rem 1.5rem; }
 
 .genesis-nav-menu .sub-menu {
   position: absolute;
@@ -1363,13 +1359,10 @@ Site Navigation
   .genesis-nav-menu .sub-menu a {
     display: block;
     color: #fff;
-    font-size: 14px;
-    font-size: 1.4rem;
-    padding: 16px 20px;
+    font-size: 90%;
     padding: 1.6rem 2rem;
     position: relative;
-    font-weight: 400;
-    /*border-top: 1px solid #1f95d3;*/ }
+    font-weight: 400; }
   .genesis-nav-menu .sub-menu > li:first-child > a {
     border-top: none; }
   .genesis-nav-menu .sub-menu > li:last-child > a {
@@ -1380,7 +1373,9 @@ Site Navigation
   margin: 0;
   margin-left: .2rem;
   opacity: 1;
-  visibility: visible; }
+  visibility: visible;
+  border-radius: 4px;
+  overflow: hidden; }
 
 .genesis-nav-menu .sub-menu .sub-menu {
   left: auto;
@@ -1552,34 +1547,12 @@ Site Navigation
     text-decoration: none; }
     .nav-primary a:hover {
       text-decoration: none; }
-  .nav-primary:before {
-    /*content:"";
-    display:block;
-    position:absolute;
-    left:-1px;
-    top:-1px;
-    width:100%;
-    height:100%;
-    border:1px solid #000000;
-    z-index:1;*/ }
   .nav-primary .genesis-nav-menu {
     position: relative;
-    z-index: 10;
-    /*border-top:1px solid #3E3E3E;
-    border-right:1px solid #3c3c3c;
-    border-bottom:1px solid #353535;*/ }
+    z-index: 10; }
 
 .menu-primary > li {
-  z-index: 1;
-  /*border-left:1px solid #3c3c3c;
-      border-right:1px solid #000000;*/ }
-
-.menu-primary > .current-menu-item, .menu-primary > li:hover, .menu-primary > .current-menu-ancestor, .menu-primary > .current-post-ancestor {
-  /*border-left-color:#cca653;
-      border-right-color:#382600;*/ }
-
-.menu-primary > li:first-child {
-  /*border-left:none;*/ }
+  z-index: 1; }
 
 .menu-primary > li:last-child {
   border-right: none; }
@@ -2003,7 +1976,7 @@ Site Footer
     margin-bottom: 0; }
 
 /*
-	Home Feature
+Home Feature
 ---------------------------------------------------------------------------------------------------- */
 #home-feature {
   background-color: #fff;
@@ -2080,7 +2053,7 @@ Site Footer
         transition: opacity 4s ease-out, transform 25s ease-out; }
 
 /*
-	Image Galleries
+Image Galleries
 ---------------------------------------------------------------------------------------------------- */
 .scwd .fotorama--wp {
   background-color: #000; }
@@ -2092,7 +2065,7 @@ Site Footer
   background-color: #222; }
 
 /*
-	CTA buttons
+CTA buttons
 ---------------------------------------------------------------------------------------------------- */
 .cta {
   display: inline-block;
@@ -2146,7 +2119,7 @@ Site Footer
   top: 1px; }
 
 /*
-	Campaign pages
+Campaign pages
 ---------------------------------------------------------------------------------------------------- */
 .cp-wrap {
   position: relative;
@@ -2178,23 +2151,23 @@ Media Queries
 ---------------------------------------------------------------------------------------------------- */
 /*
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-	only screen and (-moz-min-device-pixel-ratio: 1.5),
-	only screen and (-o-min-device-pixel-ratio: 3/2),
-	only screen and (min-device-pixel-ratio: 1.5) {
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
 
-	.header-image .site-header .wrap {
-		background: url(images/logo@2x.png) no-repeat left;
-		background-size: 320px 164px;
-	}
+.header-image .site-header .wrap {
+background: url(images/logo@2x.png) no-repeat left;
+background-size: 320px 164px;
+}
 
 }*/
 @media only screen and (max-width: 1185px) {
   /*.content-sidebar-wrap,
-  .wrap
-  {
-  	padding-left:2%;
-  	padding-right:2%;
-  }*/
+	.wrap
+	{
+	padding-left:2%;
+	padding-right:2%;
+	}*/
   .genesis-nav-menu > .menu-item > a {
     letter-spacing: normal; }
   #home-feature .right .pad {
@@ -2215,7 +2188,7 @@ Media Queries
   .site-header .widget-area, .site-inner, .title-area, .wrap {
     width: 100%; }
   .site-header {
-    min-height: 67px; }
+    min-height: 62px; }
     .site-header .wrap {
       padding: 0;
       max-width: 100%; }
@@ -2331,8 +2304,8 @@ Media Queries
     margin: 2.4rem auto 0 auto;
     font-size: 2.5rem; }
   /*-----------------------------------------------------------------------------------------------------
-  	BEGIN: Mobile Menu
-  -----------------------------------------------------------------------------------------------------*/
+	BEGIN: Mobile Menu
+	-----------------------------------------------------------------------------------------------------*/
   .mobile-menu .menu-wrap, .mobile-menu.hoverable .menu-wrap {
     display: none; }
   .mobile-menu.active.open .menu-wrap, .mobile-menu.hoverable:hover .menu-wrap {
@@ -2393,7 +2366,7 @@ Media Queries
     right: auto;
     margin-left: 1rem; }
   /*-----------------------------------------------------------------------------------------------------
-  	END: Mobile Menu
-  -----------------------------------------------------------------------------------------------------*/ }
+	END: Mobile Menu
+	-----------------------------------------------------------------------------------------------------*/ }
 
 /*# sourceMappingURL=style.css.map */
