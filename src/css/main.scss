@@ -293,21 +293,13 @@ a {
 	}
 }
 
-.menu-primary > li {
-	-webkit-transition: all .25s ease-in-out;
-	-moz-transition: all .25s ease-in-out;
-	-ms-transition: all .25s ease-in-out;
-	-o-transition: all .25s ease-in-out;
-	transition: all .25s ease-in-out;
-}
-
 .genesis-nav-menu > {
 	.menu-item > a, li.menu-item-has-children > a:after {
-		-webkit-transition: all .25s ease-in-out;
-		-moz-transition: all .25s ease-in-out;
-		-ms-transition: all .25s ease-in-out;
-		-o-transition: all .25s ease-in-out;
-		transition: all .25s ease-in-out;
+		-webkit-transition: all 0.25s cubic-bezier(0.24, 0.6, 0.44, 1.2);
+		-moz-transition: all 0.25s cubic-bezier(0.24, 0.6, 0.44, 1.2);
+		-ms-transition: all 0.25s cubic-bezier(0.24, 0.6, 0.44, 1.2);
+		-o-transition: all 0.25s cubic-bezier(0.24, 0.6, 0.44, 1.2);
+		transition: all 0.25s cubic-bezier(0.24, 0.6, 0.44, 1.2);
 	}
 }
 
@@ -1461,11 +1453,10 @@ Site Header
 	display: block;
 	width: 100%;
 	min-height: 87px;
-	background: #333;
 	.float-me {
 		position: fixed;
 		width: 100%;
-		background: #333;
+		background: #fff;
 		-webkit-box-shadow: 0px 0px 5px 0px #777;
 		box-shadow: 0px 0px 5px 0px #777;
 		border-bottom: 2px solid #0e76bc;
@@ -1476,7 +1467,7 @@ Site Header
 	}
 	&.min {
 		> .float-me {
-			background: rgba(51, 51, 51, 0.9);
+			background: rgba(255, 255, 255, 0.9);
 		}
 		.site-title {
 			line-height: .5;
@@ -1488,7 +1479,7 @@ Site Header
 }
 
 .hdr-float-clone {
-	background-color: #333;
+	background-color: #fff;
 }
 
 .home .hdr-float-clone {
@@ -1541,7 +1532,7 @@ Site Header
 			left: 0%;
 			top: 200px;
 			text-indent: -9999px;
-			background-image: url(images/logo-light.png);
+			background-image: url(images/logo-small.png);
 			background-size: auto 100%;
 			background-position: 0% 50%;
 			background-repeat: no-repeat;
@@ -1660,12 +1651,6 @@ Site Navigation
 		font-size:inherit;
 		color: #fff;
 		z-index: 500;
-		&:hover {
-			color: #333;
-		}
-	}
-	.current-menu-item > a {
-		color: #333;
 	}
 	.sub-menu {
 		.current-menu-item > a, .current-menu-parent > a {
@@ -1679,6 +1664,7 @@ Site Navigation
 		letter-spacing: .1rem;
 		border-radius: 4px;
 		margin: 0 .2rem;
+		background-color: rgba(0, 45, 114, 1);
 	}
 }
 
@@ -1801,13 +1787,13 @@ Site Navigation
 			content: '';
 			position: absolute;
 			left: 50%;
-			margin-left: -6px;
+			margin-left: -4px;
 			display: block;
 			width: 0;
 			height: 0;
-			border-left: 6px solid transparent;
-			border-right: 6px solid transparent;
-			border-top: 6px solid #fff;
+			border-left: 4px solid transparent;
+			border-right: 4px solid transparent;
+			border-top: 4px solid #fff;
 			font-size: 0;
 			line-height: 0;
 		}
@@ -1920,7 +1906,7 @@ Site Navigation
 		width: 100%;
 		height: 100%;
 		position: relative;
-		background-image: url(images/logo-small.png);
+		background-image: url(images/logo-mobile.png);
 		background-size: auto 100%;
 		background-position: 0% 50%;
 		background-repeat: no-repeat;
@@ -1951,10 +1937,6 @@ Site Navigation
 	> {
 		li {
 			z-index: 1;
-		}
-		.current-menu-item, li:hover, .current-menu-ancestor, .current-post-ancestor {
-		}
-		li {
 			&:first-child {
 			}
 			&:last-child {
@@ -1962,16 +1944,15 @@ Site Navigation
 			}
 			> a:hover {
 				color: #fff;
-				background-color: rgba(255, 255, 255, 0.2);
 			}
 		}
 		.current-menu-item > a, li:hover > a, .current-menu-ancestor > a, .current-post-ancestor > a {
 			color: #fff;
-			background-color: rgba(255, 255, 255, 0.2);
+			background-color: #33578e;
 		}
 	}
 	.sub-menu {
-		background-color: #5e5e5e;
+		background-color: rgba(0, 45, 114, 1);
 	}
 }
 
@@ -2501,14 +2482,13 @@ Home Feature
 	position: relative;
 	.logo {
 		padding: 2rem 4rem;
-		background: #303030;
+		background:rgba(255,255,255,.8);
 		display: inline-block;
 		margin-bottom: 4rem;
-		-webkit-box-shadow: 0 0 2px rgba(255, 255, 255, 0.8), 0px 0px 5px rgba(34, 34, 34, 0.7), 0px 0px 5px rgba(34, 34, 34, 0.7), 0px 0px 5px rgba(34, 34, 34, 0.7), 0px 0px 5px rgba(34, 34, 34, 0.7);
-		box-shadow: 0 0 2px rgba(255, 255, 255, 0.8), 0px 0px 5px rgba(34, 34, 34, 0.7), 0px 0px 5px rgba(34, 34, 34, 0.7), 0px 0px 5px rgba(34, 34, 34, 0.7), 0px 0px 5px rgba(34, 34, 34, 0.7);
 		border-radius: 4px;
 		max-width: 554px;
 		width: 100%;
+		border:1px solid #002d72;
 	}
 	.wrap {
 		position: relative;
