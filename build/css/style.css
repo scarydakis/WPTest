@@ -1480,7 +1480,7 @@ Site Navigation
     display: none;
     position: relative;
     padding: 0;
-    text-align: center;
+    text-align: right;
     z-index: 500;
     /*! YOU CAN CHANGE THIS VALUE TO ANYTHING OTHER THAN 999 */ }
     .mobile-menu .bar .logo {
@@ -1491,8 +1491,6 @@ Site Navigation
       .mobile-menu .bar .logo a {
         display: block; }
 
-/* begin: scrolltofixed Mozilla fix */
-/* end: scrolltofixed Mozilla fix */
 .mobile-menu-icon {
   cursor: pointer;
   display: inline-block;
@@ -1512,7 +1510,7 @@ Site Navigation
   position: absolute;
   left: 10px;
   top: 0;
-  width: 60px;
+  width: 200px;
   height: 100%;
   padding: .5rem; }
   .mobile-menu-logo > a {
@@ -1520,7 +1518,7 @@ Site Navigation
     width: 100%;
     height: 100%;
     position: relative;
-    background-image: url(images/logo-mobile.png);
+    background-image: url(images/logo-small.png);
     background-size: auto 100%;
     background-position: 0% 50%;
     background-repeat: no-repeat; }
@@ -1894,17 +1892,29 @@ Sidebars
     margin-bottom: 5rem; }
   .sidebar .enews-widget {
     background-color: #333; }
-  .sidebar .scwd-tax-list li > a {
-    display: block;
-    font-size: 1.6rem;
-    text-decoration: none;
-    border-bottom: 1px solid #ccc;
-    padding: 1rem .5rem;
-    color: #666666; }
-  .sidebar .scwd-tax-list li:first-child > a {
-    border-top: 1px solid #ccc; }
-  .sidebar .scwd-tax-list li > a:hover, .sidebar .scwd-tax-list li.current-cat > a {
-    background-color: rgba(255, 255, 255, 0.4); }
+  .sidebar .scwd-tax-list li {
+    position: relative; }
+    .sidebar .scwd-tax-list li > a {
+      display: block;
+      font-size: 1.6rem;
+      text-decoration: none;
+      border-top: 1px solid #ccc;
+      padding: 1rem .5rem;
+      color: #666666; }
+  .sidebar .scwd-tax-list > li:last-child {
+    border-bottom: 1px solid #ccc; }
+  .sidebar .scwd-tax-list li > a:hover,
+  .sidebar .scwd-tax-list li[class*='current-'] > a {
+    background-color: rgba(255, 255, 255, 0.2); }
+  .sidebar .scwd-tax-list > li li:before {
+    content: "\00BB";
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem; }
+  .sidebar .scwd-tax-list > li li > a {
+    border-top-color: #ddd;
+    font-size: 85%;
+    padding: .75rem .5rem .75rem 2.5rem; }
 
 /*
 Footer Widgets
@@ -2208,7 +2218,7 @@ background-size: 320px 164px;
     float: left; }
     .genesis-nav-menu > .menu-item.home > a {
       position: relative;
-      width: 100px;
+      width: 150px;
       text-indent: -9999px;
       background: none; }
       .genesis-nav-menu > .menu-item.home > a:after {
