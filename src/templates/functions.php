@@ -18,23 +18,23 @@ $post_format_friendly=array(
 $scwd_social_media_pages = Array(
 	'facebook' => Array(
 		'title' => 'facebook',
-		'url' => 'https://www.facebook.com/'
+		'url' => 'https://www.facebook.com/melbournecitycaravans/'
 	),
-	'twitter' => Array(
+	/*'twitter' => Array(
 		'title' => 'Twitter',
 		'url' => 'https://twitter.com/'
-	),
+	),*/
 	'gplus' => Array(
 		'title' => 'Google+',
-		'url' => 'https://plus.google.com/'
+		'url' => 'https://plus.google.com/104181724200700331164'
 	),
 	'youtube' => Array(
 		'title' => 'YouTube',
-		'url' => 'https://www.youtube.com/'
+		'url' => 'https://www.youtube.com/channel/UClgudAeAI16okh7PPn3RmAA'
 	),
 	'rss' => Array(
-		'title' => 'rss',
-		'url' => '/feed/'
+		'title' => 'products rss feed',
+		'url' => '/feed/?post_type=scwd_product'
 	)
 );
 
@@ -61,9 +61,9 @@ add_theme_support( 'genesis-footer-widgets', 3 );
 // Genesis strucural wraps
 add_theme_support( 'genesis-structural-wraps', array( 'header', 'subnav', 'inner', 'footer-widgets', 'footer' ) );
 
-
-add_filter('genesis_structural_wrap-header','test',20,2);
-function test($content, $original_output)
+// wrap structural wrap 'header' in a custom element used to 'float' it.
+add_filter('genesis_structural_wrap-header','scwd_header_wrap',20,2);
+function scwd_header_wrap($content, $original_output)
 {
 	if ($original_output==='open')
 	{
@@ -73,8 +73,41 @@ function test($content, $original_output)
 	{
 		return $content . '</div>';
 	}
-
 }
+
+//add_filter('list_cats','scwd_list_cats');
+function scwd_list_cats($catname, $catobj)
+{
+	return $catname;
+}
+
+// product filters on all pages except front page.
+add_action('genesis_before_content',function(){
+	if (is_front_page()) return;
+	global $SCWD_CUSTOM;
+	$closed=is_post_type_archive($SCWD_CUSTOM->get_product_post_type_name()) ? '' : ' closed';
+	$filter=<<<EOT
+	<aside class="sidebar">
+		<div class='scwd-caravan-filters widget-top $closed'>
+			<div class="top-bar">Find Your Caravan<span class="dashicons dashicons-arrow-right-alt2"></span></div>
+			<div class="one-third first widget">
+				<h5 class="widget-title">Brands</h5>
+				<div data-group-name='brands'>
+					[scwd-taxonomy-list hide_empty='0' taxonomy='product_categories' hilite_current='1' show_count='1' attr_data='1' include="43,44"]
+				</div>
+			</div>
+
+			<div class="two-thirds widget">
+				<h5 class="widget-title">Categories</h5>
+				<div data-group-name='categories'>
+					[scwd-taxonomy-list hide_empty='0' taxonomy='product_categories' hilite_current='1' show_count='1' attr_data='1'  include="45,46,47,48"]
+				</div>
+			</div>
+		</div>
+	</aside>
+EOT;
+	print do_shortcode($filter);
+},1,25);
 //* Add support for post formats
 add_theme_support( 'post-formats', array(
 	'aside',
@@ -103,9 +136,6 @@ add_post_type_support( 'page', array('post-formats','excerpt'));
 
 // custom image size for image gallery thumbs
 add_image_size('Image Gallery' , 150, 100, false);
-
-// custom image size for sidebar
-add_image_size('Side Bar' , 310, 100, array('center','center'));
 
 // custom image size - panoramic
 add_image_size('Panoramic Large' , 1080, 348, array('center','center'));
@@ -145,7 +175,7 @@ function scwd_enqueue_scripts()
 {
 	if (!is_admin())
 	{
-		wp_enqueue_style('scwd-fonts', '//fonts.googleapis.com/css?family=Open+Sans:400,600', array('dashicons'), CHILD_THEME_VERSION );
+		wp_enqueue_style('scwd-fonts', '//fonts.googleapis.com/css?family=Arimo:400,700', array('dashicons'), CHILD_THEME_VERSION );
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('underscore');
 		wp_enqueue_script('scwd-plugins', get_bloginfo('stylesheet_directory') . '/js/plugins.min.js', array('jquery'), CHILD_THEME_VERSION, true);
@@ -192,9 +222,9 @@ function scwd_widgets_init()
 }
 
 // favicon. change querystring to force refresh in browsers
-//add_filter('genesis_favicon_url', 'scwd_favicon' );
+add_filter('genesis_pre_load_favicon', 'scwd_favicon' );
 function scwd_favicon($favicon) {
-	$favicon .= '?a';
+	$favicon .= get_bloginfo('stylesheet_directory') . '/favicon.png';
     return $favicon;
 }
 
@@ -216,12 +246,18 @@ function scwd_force_login()
 		exit;
 	}
 }
-
+add_filter('wp_seo_get_bc_ancestors', 'test');
+function test($ancestors)
+{
+	exit(0);
+	print_r($ancestors);
+	return $ancestors;
+}
 // run shortcodes when on the edit terms admin page (editing categories or terms in custom taxonomies)
 add_action('load-edit-tags.php','scwd_maybe_do_shortcodes');
 function scwd_maybe_do_shortcodes()
 {
-	$action=$_REQUEST['action'];
+	$action=!empty($_REQUEST['action']) ? $_REQUEST['action'] : '';
 	if (empty($action))
 	{
 		add_filter('get_terms','scwd_terms_shortcodes',10,3);
@@ -231,22 +267,25 @@ function scwd_terms_shortcodes($terms, $taxonomies, $args)
 {
 	foreach ($terms as $term)
 	{
-		$term->description=wpautop(do_shortcode($term->description));
+		if (is_object($term))
+		{
+			$term->description=wpautop(do_shortcode($term->description));
+		}
 	}
 	return $terms;
 }
 
 // modify WP's core PHPMailer instance
-add_action( 'phpmailer_init', 'scwd_set_phpm_defaults',1,1);
+//add_action( 'phpmailer_init', 'scwd_set_phpm_defaults',1,1);
 function scwd_set_phpm_defaults($phpmailer)
 {
 	$phpmailer->SMTPKeepAlive=true;
-	$phpmailer->Hostname='evancarydakis.com.au';
-	//$phpmailer->debug=1;
-	//$phpmailer->SMTPDebug=3;
-	//$phpmailer->Debugoutput='error_log';
-	//print '<pre>' . print_r($phpmailer,true) . '</pre>';
-	//exit(0);
+	$phpmailer->Hostname='melbournecitycaravans.com.au';
+	$phpmailer->debug=1;
+	$phpmailer->SMTPDebug=3;
+	$phpmailer->Debugoutput='error_log';
+	print '<pre>' . print_r($phpmailer,true) . '</pre>';
+	exit(0);
 }
 
 // Encode email addresses
@@ -254,18 +293,6 @@ if (function_exists('eae_encode_emails'))
 {
 	// The Events Calendar organiser email address
 	//add_filter('tribe_get_organizer_email','eae_encode_emails');
-}
-
-// Add specific CSS class by filter
-add_filter('body_class','scwd_body_class');
-function scwd_body_class($classes)
-{
-	$classes[] = 'scwd';
-	if (!is_singular())
-	{
-		$classes[] = 'multiple';
-	}
-	return $classes;
 }
 
 // remove empty p tags in content. fix for empty p's after shortcodes
@@ -317,30 +344,6 @@ function scwd_do_nav($nav_output, $nav, $args )
 	{
 	}
 	return $pre . scwd_remove_whitespace_between_tags($nav_output) . $post;
-}
-
-
-// add Facebook pixel tracking
-//add_action( 'wp_head', 'scwd_fb_pixel');
-function scwd_fb_pixel()
-{?>
-<!-- Facebook Conversion Code for Key Page Views - www.evancarydakis.com.au -->
-<script>(function() {
-var _fbq = window._fbq || (window._fbq = []);
-if (!_fbq.loaded) {
-var fbds = document.createElement('script');
-fbds.async = true;
-fbds.src = '//connect.facebook.net/en_US/fbds.js';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(fbds, s);
-_fbq.loaded = true;
-}
-})();
-window._fbq = window._fbq || [];
-window._fbq.push(['track', '6019199810259', {'value':'0.00','currency':'AUD'}]);
-</script>
-<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6019199810259&amp;cd[value]=0.00&amp;cd[currency]=AUD&amp;noscript=1" /></noscript>
-<?PHP
 }
 
  // First, we remove all the RSS feed links from wp_head using remove_action
@@ -417,57 +420,6 @@ function scwd_single_do_tax_image($title)
 	}
 }
 
-// add additional Open Graph images
-add_filter('wpseo_pre_analysis_post_content','scwd_opengraph_image');
-function scwd_opengraph_image($content='')
-{
-	if (is_single())
-	{
-		global $post;
-
-		// to do: get tax dynamically
-		$tax='category';
-		$content .= apply_filters( 'taxonomy-images-list-the-terms', '', array(
-			'before'       => '',
-			'after'        => '',
-			'before_image' => '',
-			'after_image'  => '',
-			'image_size'   => 'Panoramic Large',
-			'taxonomy'     => $tax
-		));
-	}
-	return $content;
-}
-
-// set search parameters
-//add_action ('pre_get_posts' , 'scwd_set_search');
-function scwd_set_search($query)
-{
-    if (!is_admin() && $query->is_search)
-	{
-		$post_type_set=isset($_GET['post_type']) ? $_GET['post_type'] : Array('any');
-		$query->set('post_type',$post_type_set);
-		if (isset($_GET['post_type']) && $_GET['post_type']==='media')
-		{
-			$tax_query = array( array(
-				'taxonomy' => 'post_format',
-				'field' => 'slug',
-				'terms' => array( 'post-format-gallery', 'post-format-audio', 'post-format-video' ),
-				'operator' => 'IN',
-			) );
-			$query->set( 'tax_query', $tax_query );
-			$query->set( 'post_type', 'post' );
-		}
-	}
-	if (is_main_query())
-	{
-		// put post-info above post-title
-		//add_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-		//remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-		//add_action( 'genesis_entry_header', 'genesis_post_info', 5 );
-	}
-}
-
 // previews return a 404 when the post_format parameter is on the qs so tata, see-you, bye...
 add_filter( 'preview_post_link', 'scwd_remove_preview_post_format_parameter', 9999 );
 function scwd_remove_preview_post_format_parameter($url)
@@ -502,7 +454,7 @@ remove_action( 'genesis_footer', 'genesis_do_footer' );
 add_action( 'genesis_footer', 'scwd_genesis_footer' );
 function scwd_genesis_footer($strFooter)
 {
-	$creds_text =  do_shortcode('[scwd-smp]') . '<div class="copyright">Copyright [footer_copyright] Template Website.</div>';
+	$creds_text =  do_shortcode('[scwd-smp]') . '<div class="copyright">Copyright [footer_copyright] ' . get_bloginfo('sitename') . '</div>';
 	print do_shortcode($creds_text);
 }
 
@@ -691,13 +643,6 @@ function scwd_shortcode_custom_postinfo($attr)
 	return $postinfo;
 }
 
-// move minify files to footer when set to auto
-//add_action('genesis_after', 'scwd_w3tc_js_footer', PHP_INT_MAX-5);
-function scwd_w3tc_js_footer()
-{
-	print '<!-- W3TC-include-js-head -->';
-}
-
 
 // shortcode to produce post info for 'gallery' format posts
 add_shortcode('scwd-gallery-postinfo','scwd_shortcode_gallery_postinfo');
@@ -871,6 +816,7 @@ function scwd_shortcode_social_media_pages($atts)
 	$strRet .= '</div></div>';
 	return $strRet;
 }
+
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	BEGIN: Custom Gallery Shortcode. Copied Whollus Bollus from Wordpress and customised
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1059,56 +1005,6 @@ function scwd_gallery_shortcode($strEmpty, $attr) {
 	END: Custom Gallery Shortcode. Copied Whollus Bollus from Wordpress and customised
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-// display a custom taxonomies terms as a list (UL).
-add_shortcode('scwd-taxonomy-list','scwd_shortcode_taxonomy_list');
-function scwd_shortcode_taxonomy_list($atts)
-{
-	extract(shortcode_atts(array(
-		'title_li'		=> '1',
-		'show_count'	=> '0',
-		'hide_empty'	=> '1',
-		'description'	=> '1',
-		'taxonomy'		=> 'category',
-		'include'		=> '',
-		'exclude'		=> '',
-		'parent_id'		=> '',
-		'style'			=> 'list'
-	),$atts));
-
-	$current_cat = '';
-	if (is_singular())
-	{
-		global $post;
-		$cats=get_the_terms($post->ID, $taxonomy);
-		if ($cats !== false && !is_wp_error($cats))
-		{
-			$cats=array_values($cats);
-			$current_cat = $cats[0]->term_id;
-		}
-	}
-	$terms=wp_list_categories(array(
-		'title_li'			=> '',
-		'echo'				=> 0,
-		'hide_empty'		=> $hide_empty,
-		'taxonomy'			=> $taxonomy,
-		'include'			=> $include,
-		'exclude'			=> $exclude,
-		'show_count'		=> $show_count,
-		'current_category'	=> $current_cat,
-		'child_of'			=> $parent_id,
-		'style'				=> $style
-	),false);
-	if ($show_count === '1')
-	{
-		$terms = str_replace('</a> (', ' <span class="count">(',$terms);
-  		$terms = str_replace(')', ')</span></a>', $terms);
-  	}
-	$str_ret = '<div class="scwd-tax-list">';
-	$str_ret .= $terms;
-	$str_ret .= '</div>';
-	return $str_ret;
-}
-
 // adds querystring paramaters from $params to the url $url
 function scwd_build_querystring($url='', $params=Array())
 {
@@ -1128,18 +1024,32 @@ add_shortcode('scwd-bloginfo', 'scwd_shortcode_bloginfo');
 function scwd_shortcode_bloginfo($atts)
 {
 	extract(shortcode_atts(array(
-		'show' => '',
-		'filter' => 'raw'
+			'show' => '',
+			'attr' => '',
+			'extra' => '',
+			'filter' => 'raw'
 		), $atts
 	));
 
+	if (empty($show)) return '';
+
+	$strRet='';
 	$allowedFilters=Array('raw', 'display');
 	if (!in_array($filter,$allowedFilters))
 	{
 		$filter='raw';
 	}
-
-	return get_bloginfo($show,$filter);
+	$strRet .= get_bloginfo($show,$filter);
+	if (!empty($attr))
+	{
+		$strRet = $attr . '="' . htmlentities($strRet);
+		if (!empty($extra))
+		{
+			$strRet .= htmlentities($extra);
+		}
+		$strRet .= '"';
+	}
+	return $strRet;
 }
 
 // shortcode to get a post field
@@ -1477,3 +1387,17 @@ function printr_f($thingIn='', $print=true)
 		return $strRet;
 	}
 }
+
+// stop wp removing div tags
+function ikreativ_tinymce_fix( $in )
+{
+    // html elements being stripped
+    $in['extended_valid_elements'] = '+*[*]';
+	/*$in['cleanup_callback'] = '';
+	$in['apply_source_formatting'] = false;
+	$in['convert_fonts_to_spans'] = false;
+	$in['entity_encoding'] = 'raw';
+	$in['verify_html'] = false;*/
+    return $in;
+}
+add_filter('tiny_mce_before_init', 'ikreativ_tinymce_fix');

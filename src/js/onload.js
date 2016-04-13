@@ -133,6 +133,10 @@ function ScwdMenuFloat(objArgs)
 		{
 			doFloat();
 		}
+		else
+		{
+			reset();
+		}
 	}
 }
 function doMobileMenu()
@@ -242,67 +246,6 @@ function ScwdMobileMenu(args)
 	},40,false));
 
 	self.init();
-}
-
-function standardiseHeights()
-{
-	var doRow=function(els,counter)
-	{
-		var lastTop=0;
-		var rowCount=0;
-		var prodHighest=0;
-
-		els.css('height','').removeClass(function (index, css) { return (css.match (/(^|\s)row-\S+-\S+/g) || []).join(' ');}).each(function(i){
-			var el=$(this);
-			var thisTop=el.offset().top;
-			if (thisTop !== lastTop)
-			{
-				rowCount++;
-			}
-			el.addClass('row-' + counter + '-' + rowCount);
-			lastTop=thisTop;
-		});
-
-		var findHighest=function()
-		{
-			var thisHeight=$(this).outerHeight();
-			if (thisHeight > prodHighest)
-			{
-				prodHighest=thisHeight;
-			}
-		};
-
-		for (var i=0; i<=rowCount; i++)
-		{
-			prodHighest=0;
-			var row=els.filter('.row-' + counter + '-' + (i+1));
-			if (row.length > 1)
-			{
-				row.each(findHighest).outerHeight(prodHighest);
-			}
-		}
-	};
-
-	var setProdHeights=function(e)
-	{
-		$('.scwd.multiple .content').each(function(){
-			var els=[
-				$(this).find('> .scwd_product > .scwd-post-image'),
-				$(this).find('> .scwd_product > .entry-header > .entry-title'),
-				$(this).find('> .scwd_product > .entry-content'),
-				$(this).find('> .scwd_product > .entry-footer')
-			];
-			for (var i=0; i<els.length; i++)
-			{
-				doRow(els[i],i);
-			}
-		});
-	};
-
-	$(window).on('resize load',_.debounce(function(e){
-		setProdHeights(e);
-	},150,false));
-
 }
 
 function loadFBSDK()

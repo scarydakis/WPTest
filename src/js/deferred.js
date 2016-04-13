@@ -16,14 +16,10 @@ var monthNames={
 $(function(){
 
 	extractRefererInfo();
-	standardiseHeights();
 	//loadFBSDK();
 
 	var mobileMenu=new ScwdMobileMenu();
-	var menuFloat=new ScwdMenuFloat({
-		mobileMenuInstance : mobileMenu,
-		floatTrigger : 0
-	});
+	var menuFloat=new ScwdMenuFloat();
 
 	/*clog(tribe_ev.data);
 	clog(tribe_ev.events);
@@ -81,8 +77,8 @@ $(function(){
 		if (el !== null && el.length>0)
 		{
 			$('html, body').animate({
-				scrollTop: el.offset().top - 10 - (menuFloat.spacerEl.outerHeight(true))
-			}, 500).promise().done(function(){
+				scrollTop: el.position().top
+			}, 250).promise().done(function(){
 				if (error.length >0)
 				{
 					$(':input:visible:enabled:first', $('.gfield.gfield_error:first')).focus();
