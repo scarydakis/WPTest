@@ -81,33 +81,6 @@ function scwd_list_cats($catname, $catobj)
 	return $catname;
 }
 
-// product filters on all pages except front page.
-add_action('genesis_before_content',function(){
-	if (is_front_page()) return;
-	global $SCWD_CUSTOM;
-	$closed=is_post_type_archive($SCWD_CUSTOM->get_product_post_type_name()) ? '' : ' closed';
-	$filter=<<<EOT
-	<aside class="sidebar">
-		<div class='scwd-caravan-filters widget-top $closed'>
-			<div class="top-bar">Find Your Caravan<span class="dashicons dashicons-arrow-right-alt2"></span></div>
-			<div class="one-third first widget">
-				<h5 class="widget-title">Brands</h5>
-				<div data-group-name='brands'>
-					[scwd-taxonomy-list hide_empty='0' taxonomy='product_categories' hilite_current='1' show_count='1' attr_data='1' include="43,44"]
-				</div>
-			</div>
-
-			<div class="two-thirds widget">
-				<h5 class="widget-title">Categories</h5>
-				<div data-group-name='categories'>
-					[scwd-taxonomy-list hide_empty='0' taxonomy='product_categories' hilite_current='1' show_count='1' attr_data='1'  include="45,46,47,48"]
-				</div>
-			</div>
-		</div>
-	</aside>
-EOT;
-	print do_shortcode($filter);
-},1,25);
 //* Add support for post formats
 add_theme_support( 'post-formats', array(
 	'aside',

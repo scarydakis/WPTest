@@ -2066,11 +2066,11 @@ CTA buttons
   .cta > a {
     display: block;
     position: relative;
-    border: 1px solid #000;
+    border: 1px solid #002d72;
     font-family: Arimo;
     text-transform: uppercase;
     padding: 1rem 3rem;
-    background: #002d72;
+    background-color: rgba(1, 71, 182, 0.6);
     color: #fff;
     font-weight: 600;
     font-size: inherit;
@@ -2098,9 +2098,8 @@ CTA buttons
     border-color: #fff; }
   .cta > a:hover {
     text-decoration: none;
-    background: #0147B6;
-    color: #fff;
-    border-color: #555; }
+    background-color: rgba(1, 71, 182, 0.3);
+    color: #fff; }
   .cta > a:active {
     top: 1px; }
 
