@@ -148,7 +148,7 @@ function scwd_enqueue_scripts()
 {
 	if (!is_admin())
 	{
-		wp_enqueue_style('scwd-fonts', '//fonts.googleapis.com/css?family=Arimo:400,700', array('dashicons'), CHILD_THEME_VERSION );
+		wp_enqueue_style('scwd-fonts', '//fonts.googleapis.com/css?family=Open+Sans:400,600,700,600italic,400italic,700italic,300italic', array('dashicons'), CHILD_THEME_VERSION );
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('underscore');
 		wp_enqueue_script('scwd-plugins', get_bloginfo('stylesheet_directory') . '/js/plugins.min.js', array('jquery'), CHILD_THEME_VERSION, true);
@@ -306,9 +306,14 @@ add_filter('genesis_do_nav','scwd_do_nav', 20, 3);
 add_filter('genesis_do_subnav','scwd_do_nav', 20, 3);
 function scwd_do_nav($nav_output, $nav, $args )
 {
+	global $SCWD_CUSTOM;
 	$pre=$post='';
 	if ($args['theme_location']==='primary')
 	{
+		if ( is_singular($SCWD_CUSTOM->get_product_post_type_name()) || is_tax($SCWD_CUSTOM->get_product_taxonomy_name()) || is_tax($SCWD_CUSTOM->get_product_tag_taxonomy_name()) || is_post_type_archive($SCWD_CUSTOM->get_product_post_type_name()) )
+		{
+			$nav_output=str_replace('product-master', 'current-menu-ancestor', $nav_output);
+		}
 		$pre = '<div class="mobile-menu hoverable"><div class="bar"><div class="mobile-menu-logo"><a href="/" title="' . get_bloginfo('name', 'display') . '"></a></div><div class="mobile-menu-icon"></div></div><div class="menu-wrap">';
 		$post = '</div></div>';
 	}
@@ -456,12 +461,12 @@ function scwd_trim_excerpt($text='', $length=0)
 {
 	global $post;
 	//printr_f($post);
-
 	if ($length===0) $length=apply_filters('scwd_excerpt_length',(int)genesis_get_option('content_archive_limit'));
 
 	if ( '' === $text )
 	{
-		$text = get_the_content('');
+		$text = get_the_content();
+		$text = apply_filters('the_content', $text);
 	}
 
 	$excerpt_length = $length;
@@ -470,12 +475,13 @@ function scwd_trim_excerpt($text='', $length=0)
 	$text = strip_tags($text, apply_filters('scwd_excerpt_allowed_tags', '<p><span><div><a><br></br>'));
 	$text_length=mb_strlen($text);
 	$text = genesis_truncate_phrase( $text, $excerpt_length );
-	if ($text_length > $excerpt_length)
+	if ($text)
 	{
-		$text .= '...';
+		if  ($text_length > $excerpt_length)
+		{
+			$text .= '...';
+		}
 	}
-	$text;
-
 	return $text;
 }
 function scwd_more_link($content='')

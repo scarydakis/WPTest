@@ -43,10 +43,6 @@ html {
 	-webkit-text-size-adjust: 100%;
 }
 
-body {
-	margin: 0;
-}
-
 a {
 	&:focus {
 		outline: thin dotted;
@@ -242,11 +238,11 @@ html {
 body {
 	background-color: #fcfcfc;
 	color: #666;
-	font-family: Arimo, serif;
-	font-size: 16px;
-	font-size: 1.6rem;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.8rem;
 	font-weight: 400;
 	line-height: 1.625;
+	margin: 0;
 }
 
 button {
@@ -337,7 +333,6 @@ blockquote {
 		left: -3rem;
 		color: #999;
 		display: block;
-		font-size: 50px;
 		font-size: 5rem;
 		height: 0;
 	}
@@ -349,7 +344,6 @@ blockquote {
 		left: -3rem;
 		color: #999;
 		display: block;
-		font-size: 50px;
 		font-size: 5rem;
 		height: 0;
 		content: "\201d";
@@ -547,8 +541,7 @@ input {
 	box-shadow: none;
 	color: #fff;
 	cursor: pointer;
-	padding: 16px 24px;
-	padding: 1.6rem 2.4rem;
+	padding: 1.2rem 3rem;
 	text-transform: uppercase;
 	width: auto;
 	border: 1px solid #222;
@@ -795,7 +788,7 @@ SC: added 'fifths'
 	margin-left: 0;
 }
 
-.ginput_full {
+.ginput_full, .full {
 	width: 100%;
 	margin: 0;
 }
@@ -1187,6 +1180,52 @@ Widgets
 }
 
 /*
+Footer Widgets
+---------------------------------------------------------------------------------------------------- */
+
+.footer-widgets {
+	background-color: #303030;
+	color: #999;
+	clear: both;
+	padding: 4rem 0 1.6rem;
+
+	.widget-area
+	{
+		float: left;
+		width: 33.3334%;
+		padding: 0 1% 2%;
+
+	}
+	&.two .widget-area
+	{
+		width:50%;
+	}
+
+	a {
+		color: #fff;
+		&:hover {
+			color: #ddd;
+		}
+	}
+	.widget {
+		padding: 2rem;
+		background: rgba(255, 255, 255, 0.05);
+		border: 2px solid rgba(255, 255, 255, 0.1);
+	}
+	.widget-title {
+		color: rgba(225, 225, 225, 1);
+	}
+	li {
+		list-style-type: none;
+		margin-bottom: 6px;
+		margin-bottom: 0.6rem;
+		word-wrap: break-word;
+	}
+	.search-form input:focus {
+		border: 1px solid #ddd;
+	}
+}
+/*
 Plugins
 ---------------------------------------------------------------------------------------------------- */
 
@@ -1256,9 +1295,12 @@ Plugins
 			}
 		}
 	}
-	ul.gform_fields li {
+	ul.gform_fields li,
+	ul li.event
+	{
 		list-style-type: none;
 	}
+
 	.ginput_container {
 		margin-bottom: 2.5rem;
 	}
@@ -1355,7 +1397,7 @@ Site Header
 .site-header {
 	display: block;
 	width: 100%;
-	min-height: 77px;
+	min-height: 97px;
 	.float-me {
 		position: fixed;
 		width: 100%;
@@ -1364,7 +1406,7 @@ Site Header
 		box-shadow: 0px 0px 5px 0px #777;
 		border-bottom: 2px solid #0e76bc;
 		z-index: 1500;
-		transition:all 1s ease-in-out;
+		transition:all .4s ease-in-out;
 		&.undocked {
 			position: static;
 		}
@@ -1436,7 +1478,7 @@ Site Header
 			left: 0%;
 			top: 200px;
 			text-indent: -9999px;
-			background-image: url(images/logo-small.png);
+			background-image: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png);
 			background-size: auto 100%;
 			background-position: 0% 50%;
 			background-repeat: no-repeat;
@@ -1490,13 +1532,13 @@ Site Header
 		}
 	}
 	.site-title a {
-		min-height: 65px;
-		background: url(/dev/wp-content/uploads/logo-light-large.png) no-repeat left;
+		min-height: 85px;
+		background: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png) no-repeat left;
 		padding: 0;
 		background-size: auto 100%;
 	}
 	.site-header.min .site-title a {
-		min-height: 50px;
+		min-height: 60px;
 	}
 }
 
@@ -1505,6 +1547,15 @@ Site Header
 
 .widget-area {
 	word-wrap: break-word;
+
+	.event-list
+	{
+		font-size:1.6rem;
+		h3
+		{
+			font-size:1.8rem;
+		}
+	}
 }
 
 .site-header .widget-area {
@@ -1533,7 +1584,7 @@ Site Navigation
 .genesis-nav-menu {
 	clear: both;
 	color: #999;
-	font-family: Arimo, serif;
+	font-family: 'Open Sans', sans-serif;
 	line-height: 1.5;
 	width: 100%;
 	padding: 0;
@@ -1846,13 +1897,13 @@ Site Navigation
 				color: #fff;
 			}
 		}
-		li[class*='current-'] > a {
+		li[class*='current-'] > a, li:hover > a {
 			color: #fff;
 			background-color: #0147B6;
 		}
 	}
 	.sub-menu {
-		background-color: rgba(0, 45, 114, 1);
+		background-color: #0147B6;
 	}
 }
 
@@ -2064,16 +2115,45 @@ Content Area
 	}
 }
 
-.single-scwd_product .sidebar.product-details {
-	.label, .value {
-		display: inline-block;
+.single-scwd_product
+{
+	.specs {
+		line-height:1.2;
+		.widgettitle
+		{
+			font-weight: normal;
+			margin-bottom: 1rem !important;
+		}
+		.label, .value {
+			display: inline-block;
+			vertical-align:top;
+			margin-bottom:.5rem;
+		}
+		.label {
+			font-weight: bold;
+			width: 55%;
+		}
 	}
-	.label {
-		font-weight: bold;
-		width: 40%;
+
+	.entry-content
+	{
+		.image-gallery,
+		.specs
+		{
+			margin-bottom: 5rem;
+		}
+
+		.scwd-prod-details
+		{
+			.scwd-prod-detail
+			{
+				margin-bottom:5rem;
+			}
+		}
 	}
 }
-.scwd-prod-label
+.scwd-prod-label,
+.single-scwd_product .specs .widgettitle
 {
 	background-color: #666666;
 	color: #fff;
@@ -2316,7 +2396,7 @@ Sidebars
 	font-size: 15px;
 	font-size: 1.5rem;
 	line-height: 1.2;
-	background-color: #e8ecf6;
+	background-color: #f1f1f1;
 	&.product-details {
 		background-color: #fff;
 	}
@@ -2422,50 +2502,6 @@ Sidebars
 		}
 	}
 }
-/*
-Footer Widgets
----------------------------------------------------------------------------------------------------- */
-
-.footer-widgets {
-	background-color: #303030;
-	color: #999;
-	clear: both;
-	padding: 4rem 0 1.6rem;
-}
-
-.footer-widgets-1, .footer-widgets-2, .footer-widgets-3 {
-	float: left;
-	width: 33.3334%;
-}
-
-.footer-widgets {
-	a {
-		color: #fff;
-		&:hover {
-			color: #ddd;
-		}
-	}
-	.widget-area {
-		padding: 0 1% 2%;
-	}
-	.widget {
-		padding: 2rem;
-		background: rgba(255, 255, 255, 0.05);
-		border: 2px solid rgba(255, 255, 255, 0.1);
-	}
-	.widget-title {
-		color: rgba(225, 225, 225, 1);
-	}
-	li {
-		list-style-type: none;
-		margin-bottom: 6px;
-		margin-bottom: 0.6rem;
-		word-wrap: break-word;
-	}
-	.search-form input:focus {
-		border: 1px solid #ddd;
-	}
-}
 
 /*
 Site Footer
@@ -2495,16 +2531,6 @@ Home Feature
 	background-color: #fff;
 	font-size: 0;
 	position: relative;
-	.logo {
-		padding: 2rem 4rem;
-		background:rgba(255,255,255,.8);
-		display: inline-block;
-		margin-bottom: 4rem;
-		border-radius: 4px;
-		max-width: 554px;
-		width: 100%;
-		border:1px solid #002d72;
-	}
 	.wrap {
 		position: relative;
 		z-index: 15;
@@ -2524,18 +2550,17 @@ Home Feature
 		vertical-align: middle;
 		text-align: center;
 		padding: 2% 0%;
-		max-width: 1280px;
+		max-width:1280px;
 		margin: 0 auto;
 	}
 	h1 {
 		color: #ffffff;
-		font-size: 40px;
 		font-size: 4rem;
 		margin-bottom: 4rem;
 	}
 	.right .pad {
-		padding: 80px;
-		padding: 8rem;
+		text-shadow: 0 0 3px #333,0 0 6px #333,0 0 12px #333;
+		padding: 4rem 8rem;
 	}
 	.home-slides {
 		position: absolute;
@@ -2581,7 +2606,7 @@ Image Galleries
 .scwd {
 	.fotorama--wp {
 		margin:0;
-		background-color: #000;
+		background-color: transparent;
 	}
 	.fotorama__thumb-border {
 		border-color: #009aee;
@@ -2598,31 +2623,49 @@ CTA buttons
 .cta {
 	display: inline-block;
 	min-width: 25%;
-	width: 45%;
-	margin: 0 2%;
+	margin-bottom:3rem !important;
 	font-size: 2.25rem;
 	text-align: center;
 	> a {
 		display: block;
 		position: relative;
 		border: 1px solid #002d72;
-		font-family: Arimo;
+		font-family: 'Open Sans', sans-serif;
 		text-transform: uppercase;
 		padding: 1rem 3rem;
-		background-color: rgba(1, 71, 182, .6);
+		background-color: #002d72;
 		color: #fff;
 		font-weight: 600;
 		font-size: inherit;
-		-webkit-border-radius: 8px;
-		border-radius: 8px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
 		box-shadow: 0 0 2px 0px #333;
+
+		#home-feature &
+		{
+			background-color: rgba(35, 50, 110, .8);
+
+			&:hover
+			{
+				background-color: rgba(1, 71, 182, .6);
+			}
+		}
 	}
+	> a:hover {
+		text-decoration: none;
+		background-color: rgba(1, 71, 182, 1);
+		color: #fff;
+	}
+	> a:active {
+		top: 1px;
+	}
+
 	&.alt {
 		> a:hover {
 			display: block;
 			position: relative;
 			border: 1px solid #0e76bc;
-			font-family: Arimo;
+			font-family: 'Open Sans', sans-serif;
 			text-transform: uppercase;
 			padding: 1rem 3rem;
 			background: #fff;
@@ -2640,13 +2683,24 @@ CTA buttons
 			border-color: #fff;
 		}
 	}
-	> a:hover {
-		text-decoration: none;
-		background-color: rgba(1, 71, 182, .3);
-		color: #fff;
-	}
-	> a:active {
-		top: 1px;
+
+	.brand-logo
+	{
+		display: block;
+		height: 90px;
+		img
+		{
+			display: inline-block;
+			vertical-align: middle;
+		}
+		&:before
+		{
+			content: '';
+			display: inline-block;
+			height: 100%;
+			width: 0;
+			vertical-align: middle;
+		}
 	}
 }
 
@@ -2710,8 +2764,7 @@ background-size: 320px 164px;
 		letter-spacing: normal;
 	}
 	#home-feature .right .pad {
-		padding: 50px 20px;
-		padding: 5rem 2rem;
+		padding: 3rem 2rem;
 	}
 }
 
@@ -2807,7 +2860,8 @@ background-size: 320px 164px;
 						left: 10%;
 						top: 0;
 						text-indent: -9999px;
-						background-image: url(images/logo-small.png);
+						/*background-image: url(images/logo-small.png);*/
+						background-image: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png);
 						background-size: auto 100%;
 						background-position: 0% 50%;
 						background-repeat: no-repeat;
@@ -2854,7 +2908,7 @@ background-size: 320px 164px;
 			width: 100%;
 			margin: 0;
 			.pad {
-				padding: 4rem 1rem;
+				padding: 2rem 1rem;
 			}
 		}
 		h1 {

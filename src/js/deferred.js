@@ -46,7 +46,7 @@ $(function(){
 		yearSepBeforeMonthSep();
 
 	}
-	$('a[href*=#]:not(a[href="#"])').on('click', function(e){
+	$('a[href*="#"]:not(a[href="#"])').on('click', function(e){
 		var href=$(this);
 		$('html, body').animate({
 			scrollTop: $(href.attr('href')).offset().top - ($('.site-header').position().top+$('.site-header').outerHeight(true))
