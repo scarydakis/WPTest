@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 					authKey: 'mcc'
 				},
 				src: 'build/js',
-				dest: '/public_html/dev/wp-content/themes/scwd-custom/js'
+				dest: '/public_html/wp-content/themes/scwd-custom/js'
 			},
 			css: {
 				simple: true,
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 					authKey: 'mcc'
 				},
 				src: 'build/css',
-				dest: '/public_html/dev/wp-content/themes/scwd-custom/'
+				dest: '/public_html/wp-content/themes/scwd-custom/'
 			},
 			php: {
 				simple: true,
@@ -99,7 +99,7 @@ module.exports = function(grunt) {
 					authKey: 'mcc'
 				},
 				src: 'src/templates/',
-				dest: '/public_html/dev/wp-content/themes/scwd-custom/'
+				dest: '/public_html/wp-content/themes/scwd-custom/'
 			},
 			images: {
 				simple: true,
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
 					authKey: 'mcc'
 				},
 				src: 'src/images/',
-				dest: '/public_html/dev/wp-content/themes/scwd-custom/images/'
+				dest: '/public_html/wp-content/themes/scwd-custom/images/'
 			}
 		},
 

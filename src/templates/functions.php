@@ -197,7 +197,7 @@ function scwd_widgets_init()
 // favicon. change querystring to force refresh in browsers
 add_filter('genesis_pre_load_favicon', 'scwd_favicon' );
 function scwd_favicon($favicon) {
-	$favicon .= get_bloginfo('stylesheet_directory') . '/favicon.png';
+	$favicon .= get_bloginfo('stylesheet_directory') . '/favicon.png?v=1';
     return $favicon;
 }
 
@@ -574,6 +574,9 @@ function scwd_maybe_remove_post_meta()
 	}
 }
 
+remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+
+
 // custom post info
 add_filter('genesis_post_info','scwd_custom_post_info');
 function scwd_custom_post_info($postinfo)
@@ -710,7 +713,7 @@ function scwd_shortcode_pressclip_postinfo($attr)
 }
 
 // Get YouTube video data on save_post action and save to post
-add_action('save_post', 'scwd_save_video_data',1,1000);
+//add_action('save_post', 'scwd_save_video_data',1,1000);
 function scwd_save_video_data($postid)
 {
 	if (function_exists('get_field') && !wp_is_post_revision($postid) && get_post_format($postid) === 'video')

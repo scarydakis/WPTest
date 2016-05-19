@@ -969,6 +969,9 @@ Footer Widgets
   .footer-widgets .search-form input:focus {
     border: 1px solid #ddd; }
 
+.widget-area .scwd-featured-products .product {
+  margin-bottom: 2.6rem; }
+
 /*
 Plugins
 ---------------------------------------------------------------------------------------------------- */
@@ -1956,6 +1959,11 @@ Sidebars
   .scwd-caravan-filters li[class*='current-'] > a .dashicons:before {
     opacity: 1; }
 
+.brochure .dashicons-media-document {
+  width: auto;
+  height: auto;
+  vertical-align: middle; }
+
 /*
 Site Footer
 ---------------------------------------------------------------------------------------------------- */
@@ -1998,13 +2006,13 @@ Home Feature
     padding: 2% 0%;
     max-width: 1280px;
     margin: 0 auto; }
+    #home-feature .right .pad {
+      text-shadow: 0 0 3px #333,0 0 6px #333,0 0 12px #333;
+      padding: 4rem 4rem; }
   #home-feature h1 {
     color: #ffffff;
     font-size: 4rem;
     margin-bottom: 4rem; }
-  #home-feature .right .pad {
-    text-shadow: 0 0 3px #333,0 0 6px #333,0 0 12px #333;
-    padding: 4rem 8rem; }
   #home-feature .home-slides {
     position: absolute;
     overflow: hidden;
