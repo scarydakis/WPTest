@@ -5,6 +5,8 @@
 /*global objURL */
 /*global tribe_ev */
 /*global FB */
+/*global loadFBSDK */
+
 var monthNames={
 	short : [
 		'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'

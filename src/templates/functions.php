@@ -30,7 +30,7 @@ $scwd_social_media_pages = Array(
 	),
 	'youtube' => Array(
 		'title' => 'YouTube',
-		'url' => 'https://www.youtube.com/channel/UClgudAeAI16okh7PPn3RmAA'
+		'url' => 'https://www.youtube.com/channel/UCyWGWnF8iE0TPtaildz5KVg'
 	),
 	'rss' => Array(
 		'title' => 'products rss feed',
@@ -555,6 +555,21 @@ function scwd_genesis_footer_widgets_css_class($attrs, $context)
 
 	}
 	return $attrs;
+}
+
+//add_action('genesis_before','scwd_before');
+function scwd_before()
+{
+?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6&appId=296425023891091";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<?PHP
 }
 
 // maybe remove post meta
