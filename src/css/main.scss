@@ -239,7 +239,7 @@ body {
 	background-color: #fcfcfc;
 	color: #666;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 1.8rem;
+	font-size: 1.6rem;
 	font-weight: 400;
 	line-height: 1.625;
 	margin: 0;
@@ -1408,7 +1408,7 @@ Site Header
 .site-header {
 	display: block;
 	width: 100%;
-	min-height: 97px;
+	min-height: 72px;
 	.float-me {
 		position: fixed;
 		width: 100%;
@@ -1489,7 +1489,8 @@ Site Header
 			left: 0%;
 			top: 200px;
 			text-indent: -9999px;
-			background-image: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png);
+			/*background-image: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png);*/
+			background-image: url(images/logo-small.png);
 			background-size: auto 100%;
 			background-position: 0% 50%;
 			background-repeat: no-repeat;
@@ -1532,7 +1533,7 @@ Site Header
 	.site-description, .site-title a {
 		display: block;
 		text-indent: -9999px;
-		margin: .5rem;
+		margin: .75rem;
 	}
 	.site-header {
 		&.min .site-title a {
@@ -1543,13 +1544,13 @@ Site Header
 		}
 	}
 	.site-title a {
-		min-height: 85px;
-		background: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png) no-repeat left;
+		min-height: 55px;
+		background: url(images/logo-small.png) no-repeat left;
 		padding: 0;
 		background-size: auto 100%;
 	}
 	.site-header.min .site-title a {
-		min-height: 60px;
+		min-height: 45px;
 	}
 }
 
@@ -2144,6 +2145,13 @@ Content Area
 			font-weight: bold;
 			width: 55%;
 		}
+		.price.sale {
+			color: #00aa00;
+		}
+		.price.on-sale * {
+			text-decoration: line-through !important;
+		}
+
 	}
 
 	.entry-content
@@ -2881,8 +2889,7 @@ background-size: 320px 164px;
 						left: 10%;
 						top: 0;
 						text-indent: -9999px;
-						/*background-image: url(images/logo-small.png);*/
-						background-image: url(../../../wp-content/uploads/logo-melbourne-city-caravans-150x92.png);
+						background-image: url(images/logo-small.png);
 						background-size: auto 100%;
 						background-position: 0% 50%;
 						background-repeat: no-repeat;
